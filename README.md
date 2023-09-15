@@ -5,4 +5,4 @@ Flask and SQL blog with minimal no Domain Driven design
 
 - Install dependies with `pipenv install`
 - Run a pipenv shell with `pipenv shell`
-- Run the app with `flask run`
+- Run the app with `python app.py`
