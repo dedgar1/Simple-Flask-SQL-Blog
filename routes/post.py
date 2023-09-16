@@ -1,8 +1,9 @@
-from flask import Blueprint, request, render_template, redirect,url_for, current_app
+from flask import Blueprint, request, render_template, redirect, url_for, current_app
 from sqlmodel import Session, select
 from models.post import Post
 
 post_pages = Blueprint("post", __name__)
+
 
 @post_pages.get("/post/<string:title>")
 def display_post(title: str):
@@ -10,6 +11,7 @@ def display_post(title: str):
         statement = select(Post).where(Post.title == title)
         post = session.exec(statement).first()
         return render_template("post.html", title=title, content=post.content)
+
 
 @post_pages.route("/post/", methods=["GET", "POST"])
 def create_post():
@@ -20,5 +22,13 @@ def create_post():
             session.add(Post(title=title, content=content))
             session.commit()
         return redirect(url_for(".display_post", title=title))
-    return render_template("new_post.html")
 
+    if request.method == "GET":
+        title = "List of posts"
+        with Session(current_app.engine) as session:
+            statement = select(Post)
+            posts = session.exec(statement).fetchall()
+            print(type(posts))
+            for post in posts:
+                print(post)
+            return render_template("all_posts.html", page_title=title, posts=posts)
