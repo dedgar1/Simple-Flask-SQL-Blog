@@ -1,0 +1,6 @@
+# temp python files
+*.pyc
+
+# Vscode settings
+*.vscode
+

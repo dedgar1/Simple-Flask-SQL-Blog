@@ -1,10 +1,12 @@
 from typing import Optional
 from datetime import datetime
-from sqlmodel import Field, SQLModel
+from dataclasses import dataclass
+from random import randint
 
 
-class Post(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+@dataclass
+class Post():
     title: str
     content: str
-    publish_date: datetime = Field(default_factory=datetime.today)
+    publish_date: datetime
+    id: Optional[int] = randint(0, 1000)

@@ -3,6 +3,7 @@ from routes.post import post_pages
 from sqlmodel import SQLModel, create_engine
 from models.post import Post
 
+
 def init_app():
     """Initialize the core application."""
     app = Flask(__name__, instance_relative_config=False)
@@ -15,7 +16,6 @@ def init_app():
         # Register Blueprints
         app.register_blueprint(post_pages)
         return app
-
 
 
 if __name__ == "__main__":
